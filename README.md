@@ -36,8 +36,6 @@ The results are saved to `results/compare_dist_results.pickle` and reported in `
 ## Feature reduction
 The script `feature_reduction.py` performs reduction of features for five best performing features vectors.
 Reduced feature vectors are saved to `results/reduced_features.pickle`.
-
-The outputs are reported in `features_reduction_results.ipynb`.
                         
 ## Linear projection dimensionality reduction methods
 For this part we utilize smaller dataset drawn from the dataset using the script `data_preprocessing/03_sample.py` with parameters setting `min_cases_in_class = 200 000, fraction_of_class = 0.001`  (followed by `04_preprocessing.py` and `05_split_and_prob_dist_features_extraction.py`).
