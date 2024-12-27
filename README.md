@@ -54,6 +54,19 @@ In `kNN_test_scores.py`, classification scores on test set for chosen kNN parame
 
 The output DataFrame is stored in `results/kNN_test_scores.pkl` and reported in `kNN_scores_visualization.ipynb`.
 
+## Lightgbm classification
+The LightGBM classification is performed in `lightgbm_classification.py` script. It uses Optuna for hyperparameters tuning for each feature set. The final models are saved in folder `saved_models/lightgbm` and the results in `results/lightgbm` folder.
+
+The report with the best hyperparameters is presented in `lightgbm_results.ipynb` notebook.
+
+## Deep learning model for classification
+All the scripts for deep learning model are located in the `neural_network` folder:
+- `model_functions.py` - the definition of the model;
+- `training_functions.py` - functions needed for the training and evaluation;
+- `train_model.py` - main script for data loading and preprocessing followed by hyperparameter tuning and training of the final model. The best model is saved in `neural_network/saved_models/best_model.pt` and its hyperparameters in `neural_network/results/optuna_best_model_params.pkl`. 
+
+The results are reported in `neural_network/show_results.ipynb`.
+
 ## Performance on VNAT dataset
 For running this evaluation it is expected that the dataset is located in `data/VNAT_raw`.
 Scripts responsible for preprocessing the raw VNAT data into a form suitable for evaluation are located in the folder `data_preprocessing/prepare_vnat_dataset`. 
@@ -65,6 +78,18 @@ The following data preprocessing steps need to be run first:
 
 ### Evaluation
 The script `knn_vnat.py` computes classification scores on test set of the VNAT dataset.
+
+## Novelty detection
+All the scripts for novelty detection are presented in the `novelty` folder:
+- `novelty_LOF.py` - performs the evaluation of the Local Outlier Factor method;
+- `RBDA.py` - the custom implementation of the Rank-Based Detection Algorithm;
+- `novelty_RBDA.py` - perform the evaluation of the RBDA method;
+- `novelty_lightgbm_train.py` - performs the hyperparameter optimization and training of the lightgbm models (individual for each novelty scenario and each feature set);
+- `novelty_lightgbm_eval.py` - evaluation of the best lightgbm models trained by the previous script.
+
+All results are stored in `results/novelty` and lightgbm models are saved in `saved_models/novelty/lightgbm`.
+
+Obtained results are reported in `novelty/novelty_results.ipynb`.
 
 ## Accelerating kNN with AP clustering
 The script `kNN_with_ap_clustering_test_scores.py` computes classification scores on test set for chosen kNN parameters and $l_p$-metric - kNN is performed with respect to full training set, set consisting of AP cluster centers and randomly drawn samples.
