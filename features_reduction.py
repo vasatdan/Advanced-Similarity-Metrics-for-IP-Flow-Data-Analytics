@@ -89,6 +89,7 @@ print('time to load dataframes:', timedelta(seconds=end-start))
 
 SCORE =[]
 SCORE_reduced = []
+F1_reduced = []
 REDUCTION = {}
 random_seed = 5 # the best results gained for CM_all, the best results for L1_all, CM, L1, W  are gained for random_seed = 42 
 names = [ 'CM all', 'L1 all', 'CM best', 'L1 best', 'W best'] 
@@ -141,6 +142,7 @@ for i,features in enumerate( [features_CM_all, features_L1_all , features_CM_bes
         score_old = score_new
         
     SCORE_reduced.append(score_new)
+    F1_reduced.append(macro_f1)
     print('features_reduced = ',Xtrain_new.columns)
     print(Xtrain_new.shape[1])
     
@@ -150,8 +152,9 @@ print(SCORE)
 print(SCORE_reduced)
 
 import pickle
-with open('results/reduced_features.pickle', 'wb') as handle:
-    pickle.dump(REDUCTION, handle, protocol=pickle.HIGHEST_PROTOCOL)
+filename = f'results/reduced_features_{random_seed}.pickle'
+with open(filename, 'wb') as handle:
+    pickle.dump((names, REDUCTION, SCORE, SCORE_reduced, F1_reduced), handle, protocol=pickle.HIGHEST_PROTOCOL)
 
 
 
